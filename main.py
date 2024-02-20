@@ -292,7 +292,10 @@ MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
 def contact():
     if request.method == "POST":
         data = request.form
-        send_email(data["name"], data["email"], data["phone"], data["message"])
+        try:
+            send_email(data["name"], data["email"], data["phone"], data["message"])
+        except:
+            print("message failed to send")
         return render_template("contact.html", msg_sent=True)
     return render_template("contact.html", msg_sent=False)
 
